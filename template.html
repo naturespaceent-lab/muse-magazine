@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUSE | K-POP & K-Culture News</title>
+  <meta name="description" content="K-POP, Korean Drama, Fashion, Beauty - The latest K-Culture news and entertainment media">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #333;
+      background: #fff;
+    }
+
+    a { color: #333; text-decoration: none; }
+    a:hover { color: #c0392b; }
+    img { display: block; max-width: 100%; height: auto; }
+    ul, ol { list-style: none; }
+
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 15px; }
+
+    /* HEADER */
+    .site-header {
+      border-bottom: 2px solid #333;
+      padding: 18px 0 14px;
+    }
+    .site-header .wrap {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    .site-logo {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 700;
+      font-size: 32px;
+      letter-spacing: 0.06em;
+      color: #111;
+      line-height: 1;
+    }
+    .site-logo a { color: #111; }
+    .site-logo a:hover { color: #111; }
+
+    .main-nav { display: flex; gap: 0; }
+    .main-nav a {
+      display: block;
+      padding: 0 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+      border-left: 1px solid #e5e5e5;
+    }
+    .main-nav a:first-child { border-left: none; }
+    .main-nav a:hover { color: #c0392b; }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: 1px solid #e5e5e5;
+      cursor: pointer;
+      padding: 6px 8px;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .hamburger span { display: block; width: 18px; height: 2px; background: #333; }
+
+    /* HERO */
+    .hero { padding: 20px 0 0; }
+    .hero-grid { display: flex; gap: 0; border: 1px solid #e5e5e5; }
+    .hero-main { display: block; flex: 1; min-width: 0; position: relative; overflow: hidden; }
+    .hero-main img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+    .hero-main-overlay {
+      padding: 12px 14px;
+      background: #fff;
+      border-top: 1px solid #e5e5e5;
+    }
+    .hero-main-overlay .category-badge {
+      display: inline-block;
+      color: #c0392b;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .hero-main-overlay h2 { font-size: 18px; font-weight: 700; line-height: 1.5; }
+    .hero-main-overlay .date { font-size: 11px; color: #999; display: block; margin-top: 4px; }
+
+    .hero-side {
+      width: 300px;
+      flex-shrink: 0;
+      border-left: 1px solid #e5e5e5;
+    }
+    .hero-side-item {
+      display: flex;
+      gap: 10px;
+      padding: 10px 12px;
+      border-bottom: 1px solid #e5e5e5;
+      align-items: flex-start;
+    }
+    .hero-side-item:last-child { border-bottom: none; }
+    .hero-side-item img { width: 90px; height: 60px; flex-shrink: 0; object-fit: cover; }
+    .hero-side-item .text { flex: 1; min-width: 0; }
+    .hero-side-item h3 { font-size: 12px; font-weight: 600; line-height: 1.5; }
+    .hero-side-item .date { font-size: 10px; color: #999; display: block; margin-top: 2px; }
+
+    .source-credit { font-size: 10px; color: #aaa; display: block; margin-top: 2px; }
+    .hero-main-overlay .source-credit { margin-top: 4px; }
+
+    /* SECTION HEADER */
+    .sec-head {
+      border-bottom: 2px solid #333;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .sec-head h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .sec-head .more { font-size: 12px; color: #999; }
+    .sec-head .more:hover { color: #c0392b; }
+
+    /* PICKUP - 6col grid */
+    .section-pickup { padding: 20px 0; }
+    .pickup-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+    .pickup-card { display: block; }
+    .pickup-card .thumb { margin-bottom: 6px; border: 1px solid #e5e5e5; overflow: hidden; }
+    .pickup-card .thumb img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+    .pickup-card:hover h3 { color: #c0392b; }
+    .pickup-card h3 { font-size: 12px; font-weight: 600; line-height: 1.5; }
+    .pickup-card .date { font-size: 10px; color: #999; display: block; margin-top: 2px; }
+
+    /* NEWS - list rows */
+    .section-news { padding: 0 0 20px; }
+    .news-list { border-top: 1px solid #e5e5e5; }
+    .news-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #e5e5e5;
+      align-items: flex-start;
+    }
+    .news-item img { width: 120px; height: 80px; flex-shrink: 0; object-fit: cover; border: 1px solid #e5e5e5; }
+    .news-item .text { flex: 1; min-width: 0; }
+    .news-item .news-category { font-size: 10px; font-weight: 700; color: #c0392b; margin-bottom: 2px; }
+    .news-item h3 { font-size: 14px; font-weight: 600; line-height: 1.5; }
+    .news-item:hover h3 { color: #c0392b; }
+    .news-item .date { font-size: 11px; color: #999; display: block; margin-top: 3px; }
+
+    /* AD */
+    .ad-banner { text-align: center; padding: 16px 0 20px; }
+    .ad-banner .ad-label { font-size: 10px; color: #bbb; margin-bottom: 4px; }
+    .ad-banner .ad-placeholder {
+      width: 728px; max-width: 100%; height: 90px;
+      background: #f5f5f5; border: 1px solid #e5e5e5;
+      margin: 0 auto; display: flex; align-items: center;
+      justify-content: center; color: #ccc; font-size: 12px;
+    }
+
+    /* RANKING */
+    .section-ranking { padding: 0 0 20px; }
+    .ranking-tabs { display: flex; gap: 0; margin-bottom: 10px; border-bottom: 1px solid #e5e5e5; }
+    .ranking-tabs button {
+      background: none; border: none; padding: 6px 14px;
+      font-size: 12px; font-family: inherit; color: #999;
+      cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px;
+    }
+    .ranking-tabs button.active { color: #333; border-bottom-color: #c0392b; font-weight: 600; }
+    .ranking-tabs button:hover { color: #333; }
+
+    .ranking-list { border-top: 1px solid #e5e5e5; }
+    .ranking-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 0; border-bottom: 1px solid #e5e5e5;
+    }
+    .ranking-item .rank { font-size: 18px; font-weight: 700; color: #c0392b; width: 28px; text-align: center; flex-shrink: 0; }
+    .ranking-item .rank.top3 { font-size: 20px; }
+    .ranking-item img { width: 64px; height: 64px; flex-shrink: 0; object-fit: cover; border: 1px solid #e5e5e5; }
+    .ranking-item .text { flex: 1; min-width: 0; }
+    .ranking-item h3 { font-size: 13px; font-weight: 600; line-height: 1.5; }
+    .ranking-item .date { font-size: 10px; color: #999; display: block; margin-top: 2px; }
+
+    /* INTERVIEW - 3col */
+    .section-interview { padding: 0 0 20px; }
+    .interview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .interview-card { display: block; }
+    .interview-card .thumb { margin-bottom: 6px; border: 1px solid #e5e5e5; overflow: hidden; }
+    .interview-card .thumb img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+    .interview-card:hover h3 { color: #c0392b; }
+    .interview-card .interview-badge { font-size: 10px; font-weight: 700; color: #c0392b; display: block; margin-bottom: 2px; }
+    .interview-card h3 { font-size: 13px; font-weight: 600; line-height: 1.5; }
+    .interview-card .date { font-size: 11px; color: #999; display: block; margin-top: 2px; }
+
+    /* PHOTO - 4col grid */
+    .section-photo { padding: 0 0 20px; }
+    .photo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+    .photo-item { display: block; position: relative; aspect-ratio: 1/1; overflow: hidden; }
+    .photo-item img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-item:hover { opacity: 0.85; }
+    .photo-item .photo-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 6px 8px; background: rgba(0,0,0,0.55);
+      color: #fff; font-size: 10px; line-height: 1.3;
+    }
+
+    /* FOOTER */
+    .site-footer {
+      background: #f5f5f5;
+      border-top: 1px solid #e5e5e5;
+      margin-top: 20px;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .site-footer .footer-nav { margin-bottom: 12px; }
+    .site-footer .footer-nav a { font-size: 12px; color: #666; padding: 0 10px; }
+    .site-footer .footer-nav a:hover { color: #c0392b; }
+    .site-footer .footer-links { margin-bottom: 10px; }
+    .site-footer .footer-links a { font-size: 11px; color: #999; padding: 0 8px; }
+    .site-footer .footer-links a:hover { color: #666; }
+    .site-footer .copyright { font-size: 11px; color: #aaa; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .main-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border-bottom: 1px solid #e5e5e5; z-index: 100; }
+      .main-nav.open { display: flex; }
+      .main-nav a { padding: 10px 15px; border-left: none; border-bottom: 1px solid #e5e5e5; }
+      .site-header .wrap { position: relative; }
+      .hamburger { display: flex; }
+      .hero-grid { flex-direction: column; }
+      .hero-side { width: 100%; border-left: none; border-top: 1px solid #e5e5e5; }
+      .pickup-grid { grid-template-columns: repeat(3, 1fr); }
+      .news-item img { width: 96px; height: 64px; }
+      .interview-grid { grid-template-columns: repeat(2, 1fr); }
+      .photo-grid { grid-template-columns: repeat(3, 1fr); }
+      .ranking-tabs { overflow-x: auto; }
+      .ad-banner .ad-placeholder { height: 60px; }
+    }
+
+    @media (max-width: 480px) {
+      .site-logo { font-size: 24px; }
+      .pickup-grid { grid-template-columns: repeat(2, 1fr); }
+      .interview-grid { grid-template-columns: 1fr; }
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+      .ranking-item img { width: 50px; height: 50px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="wrap">
+      <h1 class="site-logo"><a href="/">MUSE</a></h1>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" id="navLinks">
+        <a href="#">ニュース</a>
+        <a href="#">インタビュー</a>
+        <a href="#">スタイル</a>
+        <a href="#">カルチャー</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        {{HERO_MAIN}}
+        <div class="hero-side">
+          {{HERO_SIDE_ITEMS}}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PICKUP -->
+  <section class="section-pickup">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>PICK UP</h2>
+        <a href="#" class="more">もっと見る &gt;</a>
+      </div>
+      <div class="pickup-grid">
+        {{PICKUP_ITEMS}}
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section class="section-news">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>NEWS</h2>
+        <a href="#" class="more">もっと見る &gt;</a>
+      </div>
+      <div class="news-list">
+        {{NEWS_ITEMS}}
+      </div>
+    </div>
+  </section>
+
+  <!-- AD -->
+  <div class="ad-banner">
+    <div class="wrap">
+      <div class="ad-label">AD</div>
+      <div class="ad-placeholder">ADVERTISEMENT</div>
+    </div>
+  </div>
+
+  <!-- RANKING -->
+  <section class="section-ranking">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>RANKING</h2>
+        <a href="#" class="more">もっと見る &gt;</a>
+      </div>
+      <div class="ranking-tabs" id="rankingTabs">
+        <button class="active" data-tab="all">全体</button>
+        <button data-tab="entertainment">エンタメ</button>
+        <button data-tab="music">音楽</button>
+        <button data-tab="drama">ドラマ</button>
+        <button data-tab="fashion">ファッション</button>
+      </div>
+      <div class="ranking-list" id="rankingList">
+        {{RANKING_ITEMS}}
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERVIEW -->
+  <section class="section-interview">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>INTERVIEW</h2>
+        <a href="#" class="more">もっと見る &gt;</a>
+      </div>
+      <div class="interview-grid">
+        {{INTERVIEW_ITEMS}}
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO -->
+  <section class="section-photo">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>PHOTO</h2>
+        <a href="#" class="more">もっと見る &gt;</a>
+      </div>
+      <div class="photo-grid">
+        {{PHOTO_ITEMS}}
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-nav">
+        <a href="#">ニュース</a>
+        <a href="#">インタビュー</a>
+        <a href="#">スタイル</a>
+        <a href="#">カルチャー</a>
+      </div>
+      <div class="footer-links">
+        <a href="#">About</a>
+        <a href="#">Advertising</a>
+        <a href="#">Contact</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+      </div>
+      <div class="copyright">&copy; 2018-2026 MUSE</div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var h = document.getElementById('hamburger');
+      var n = document.getElementById('navLinks');
+      if (h && n) h.addEventListener('click', function() { n.classList.toggle('open'); });
+    })();
+    (function() {
+      var tabs = document.getElementById('rankingTabs');
+      var items = document.querySelectorAll('.ranking-item');
+      if (!tabs) return;
+      tabs.addEventListener('click', function(e) {
+        var btn = e.target.closest('button');
+        if (!btn) return;
+        var all = tabs.querySelectorAll('button');
+        for (var i = 0; i < all.length; i++) all[i].classList.remove('active');
+        btn.classList.add('active');
+        var tab = btn.getAttribute('data-tab');
+        var rank = 1;
+        for (var j = 0; j < items.length; j++) {
+          var cat = items[j].getAttribute('data-category');
+          if (tab === 'all' || cat === tab) {
+            items[j].style.display = '';
+            var r = items[j].querySelector('.rank');
+            r.textContent = rank;
+            r.className = rank <= 3 ? 'rank top3' : 'rank';
+            rank++;
+          } else {
+            items[j].style.display = 'none';
+          }
+        }
+      });
+    })();
+    document.querySelectorAll('img[data-fallback]').forEach(function(img) {
+      img.addEventListener('error', function() {
+        if (!this.dataset.failed) { this.dataset.failed = '1'; this.src = this.dataset.fallback; }
+      });
+    });
+  </script>
+
+</body>
+</html>
