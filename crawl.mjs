@@ -35,7 +35,7 @@ const SOURCES = [
   { name: 'KDramaStars', url: 'https://www.kdramastars.com/rss.xml', lang: 'en' },
   { name: 'DramaNews', url: 'https://www.dramabeans.com/feed/', lang: 'en' },
   // === Tier 4: Japanese K-pop media ===
-  { name: 'KstyleJP', url: 'https://m.kstyle.com/feed/', lang: 'ja' },
+  { name: 'WowKoreaEnt', url: 'https://www.wowkorea.jp/rss/rss_ent.xml', lang: 'ja' },
   { name: 'WowKorea', url: 'https://www.wowkorea.jp/rss/rss_all.xml', lang: 'ja' },
   { name: 'Danmee', url: 'https://danmee.jp/feed/', lang: 'ja' },
   { name: 'KPOPMONSTER', url: 'https://kpopmonster.jp/feed/', lang: 'ja' },
@@ -1468,7 +1468,8 @@ function escapeHtml(str) {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 // ============================================================
